@@ -27,7 +27,7 @@ function parse(URL: string) {
     const protocol = splt[0];
 
     parsedurl.protocol = protocol.toLowerCase();
-    modurl = `${parsedurl.protocol}://${splt[1]}${addColonLast(splt[1]) === -1 ? '/' : ''}`;
+    modurl = `${parsedurl.protocol}://${splt[1]}${addColonLast(splt[1]) ? '/' : ''}`;
   } else {
     parsedurl.protocol = 'https';
     modurl = `${parsedurl.protocol}://${url}${addColonLast(url) ? '/' : ''}`;
