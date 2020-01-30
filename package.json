@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "lint": "eslint ./lib/*",
+    "lint": "eslint ./lib/**/*.ts",
     "build": "tsc"
   },
   "keywords": [
