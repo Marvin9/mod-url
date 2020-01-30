@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6",
+    "removeComments": true,
+    "preserveWatchOutput": true
+  },
+  "include": [
+    "lib/**/*"
+  ],
+  "exclude": [
+    "./config/*.ts",
+    "node_modules"
+  ]
+}
