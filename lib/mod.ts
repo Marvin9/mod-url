@@ -6,7 +6,7 @@ const {
   subdomain,
   domain,
   domainext,
-  done,
+  do,
 } = require('./helper/modifier');
 
 const mod: modType = {
@@ -17,7 +17,7 @@ const mod: modType = {
   subdomain,
   domain,
   domainext,
-  done,
+  do,
 };
 
 module.exports = mod;

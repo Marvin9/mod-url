@@ -20,7 +20,7 @@ function domainext(ext: string): modType {
   return this;
 }
 
-function done(): string {
+function do(): string {
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
   } = this.parsedurl;
@@ -32,5 +32,5 @@ module.exports = {
   subdomain,
   domain,
   domainext,
-  done,
+  do,
 };
