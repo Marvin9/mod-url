@@ -22,4 +22,4 @@ const mod: modType = {
   done,
 };
 
-module.exports = mod;
+module.exports = { ...mod };
