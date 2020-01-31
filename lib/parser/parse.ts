@@ -3,7 +3,7 @@ import { parsedurlType } from '../../config/interfaces';
 const { addColonLast } = require('../utils');
 
 function parse(URL: string) {
-  if (URL === '') return URL;
+  if (URL === '' || URL.length > 2048) return URL;
 
   const url: string = `${URL}`;
   let modurl: string;
