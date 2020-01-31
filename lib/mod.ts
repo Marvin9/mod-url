@@ -5,6 +5,7 @@ const {
   protocol,
   subdomain,
   domain,
+  port,
   domainext,
   done,
 } = require('./helper/modifier');
@@ -16,6 +17,7 @@ const mod: modType = {
   protocol,
   subdomain,
   domain,
+  port,
   domainext,
   done,
 };

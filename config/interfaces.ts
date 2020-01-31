@@ -6,6 +6,7 @@ export interface modType {
   subdomain: Function;
   domain: Function;
   domainext: Function;
+  port: Function;
   done: Function;
 }
 
