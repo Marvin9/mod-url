@@ -1,10 +1,8 @@
-import { parsedurlType } from '../../config/interfaces';
+import { parsedurlType, modType } from '../../config/interfaces';
 
-const { addColonLast } = require('../utils');
+const { addColonLast, isGarbage } = require('../utils');
 
-function parse(URL: string) {
-  if (URL === '' || URL.length > 2048) return URL;
-
+function parse(URL: string): modType {
   const url: string = `${URL}`;
   let modurl: string;
 
@@ -19,6 +17,11 @@ function parse(URL: string) {
     onlypath: null,
   };
 
+  if (isGarbage(URL) || URL === '' || URL.length > 2048) {
+    this.parsedurl = parsedurl;
+    return this;
+  }
+
   // protocol finder
   let colonSlashSlash = url.indexOf('://');
 
@@ -29,6 +32,7 @@ function parse(URL: string) {
     parsedurl.protocol = protocol.toLowerCase();
     modurl = `${parsedurl.protocol}://${splt[1]}${addColonLast(splt[1]) ? '/' : ''}`;
   } else {
+    // TODO -> MAILTO
     parsedurl.protocol = 'https';
     modurl = `${parsedurl.protocol}://${url}${addColonLast(url) ? '/' : ''}`;
   }
