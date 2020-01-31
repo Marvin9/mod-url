@@ -16,7 +16,7 @@ function domain(dm: string): modType {
 }
 
 function domainext(ext: string): modType {
-  this.parsedurl.ext = ext;
+  this.parsedurl.domainext = ext;
   return this;
 }
 
