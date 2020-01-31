@@ -3,6 +3,7 @@ node_js:
   - 8
 
 install:
+  - npm install -g codecov
   - npm install @types/node
   - npm install
 
@@ -10,4 +11,4 @@ before_script:
   - npm run build
 
 script:
-  - npm run lint
+  - npm run ci

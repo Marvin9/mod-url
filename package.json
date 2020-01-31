@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint ./lib/**/*.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "ci": "npm run lint & npm run test"
   },
   "keywords": [
     "url",
