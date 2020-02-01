@@ -8,6 +8,7 @@ const {
   port,
   domainext,
   onlypath,
+  path,
   done,
 } = require('./helper/modifier');
 
@@ -21,6 +22,7 @@ const mod: modType = {
   port,
   domainext,
   onlypath,
+  path,
   done,
 };
 

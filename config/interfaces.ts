@@ -8,6 +8,7 @@ export interface modType {
   port: Function;
   domainext: Function;
   onlypath: Function;
+  path: Function;
   done: Function;
 }
 

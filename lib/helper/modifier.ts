@@ -44,7 +44,26 @@ function onlypath(op: string): modType {
   let { path } = this.parsedurl;
   path = path.split('?');
   path[0] = newOp;
-  this.parsedurl.path = path;
+  this.parsedurl.path = path.join('?');
+  return this;
+}
+
+function path(pth: string): modType {
+  if (isGarbage(pth)) return this;
+  let newPth = pth;
+  if (newPth[0] !== '/') {
+    newPth = `/${pth}`;
+  }
+  const queryExist = newPth.indexOf('?') !== -1;
+  if (queryExist) {
+    const [onlyPth, query] = newPth.split('?');
+    this.parsedurl.query = `?${query}`;
+    this.parsedurl.onlypath = onlyPth;
+  } else {
+    this.parsedurl.query = '';
+    this.parsedurl.onlypath = newPth;
+  }
+  this.parsedurl.path = newPth;
   return this;
 }
 
@@ -62,5 +81,6 @@ module.exports = {
   port,
   domainext,
   onlypath,
+  path,
   done,
 };
