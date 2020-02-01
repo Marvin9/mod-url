@@ -57,7 +57,7 @@ function path(pth: string): modType {
   }
   const queryExist = newPth.indexOf('?') !== -1;
   if (queryExist) {
-    const [onlyPth, query] = newPth.split('?');
+    const [onlyPth, query] = newPth.split('?'); // eslint-disable-line
     this.parsedurl.query = `?${query}`;
     this.parsedurl.onlypath = onlyPth;
   } else {
