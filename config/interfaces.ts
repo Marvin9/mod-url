@@ -5,8 +5,9 @@ export interface modType {
   protocol: Function;
   subdomain: Function;
   domain: Function;
-  domainext: Function;
   port: Function;
+  domainext: Function;
+  onlypath: Function;
   done: Function;
 }
 

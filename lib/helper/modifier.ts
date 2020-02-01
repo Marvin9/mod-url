@@ -32,6 +32,22 @@ function port(prt: string | number): modType {
   return this;
 }
 
+function onlypath(op: string): modType {
+  if (isGarbage(op)) return this;
+  let newOp = op;
+  const firstChar = op[0];
+  [newOp] = op.split('?');
+  if (firstChar !== '/') {
+    newOp = `/${op}`;
+  }
+  this.parsedurl.onlypath = newOp;
+  let { path } = this.parsedurl;
+  path = path.split('?');
+  path[0] = newOp;
+  this.parsedurl.path = path;
+  return this;
+}
+
 function done(): string {
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
@@ -45,5 +61,6 @@ module.exports = {
   domain,
   port,
   domainext,
+  onlypath,
   done,
 };
