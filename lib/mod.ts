@@ -9,6 +9,7 @@ const {
   domainext,
   onlypath,
   path,
+  query,
   done,
 } = require('./helper/modifier');
 
@@ -23,6 +24,7 @@ const mod: modType = {
   domainext,
   onlypath,
   path,
+  query,
   done,
 };
 

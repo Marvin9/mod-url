@@ -41,6 +41,7 @@ function onlypath(op: string): modType {
     newOp = `/${op}`;
   }
   this.parsedurl.onlypath = newOp;
+  // eslint-disable-next-line no-shadow
   let { path } = this.parsedurl;
   path = path.split('?');
   path[0] = newOp;
@@ -67,6 +68,18 @@ function path(pth: string): modType {
   return this;
 }
 
+function query(qry: string): modType {
+  if (isGarbage(qry)) return this;
+  let newQry = qry;
+  if (qry[0] !== '?') {
+    newQry = `?${qry}`;
+  }
+  this.parsedurl.query = newQry;
+  const [path] = this.parsedurl.path.split('?'); // eslint-disable-line
+  this.parsedurl.path = [path, newQry.slice(1)].join('?');
+  return this;
+}
+
 function done(): string {
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
@@ -82,5 +95,6 @@ module.exports = {
   domainext,
   onlypath,
   path,
+  query,
   done,
 };

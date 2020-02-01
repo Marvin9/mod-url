@@ -9,6 +9,7 @@ export interface modType {
   domainext: Function;
   onlypath: Function;
   path: Function;
+  query: Function;
   done: Function;
 }
 
