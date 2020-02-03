@@ -1,16 +1,16 @@
 export interface modType {
-  url: string;
-  parsedurl: parsedurlType | null;
-  parse: FunctionConstructor;
-  protocol: Function;
-  subdomain: Function;
-  domain: Function;
-  port: Function;
-  domainext: Function;
-  onlypath: Function;
-  path: Function;
-  query: Function;
-  done: Function;
+  readonly url: string;
+  readonly parsedurl: parsedurlType | null;
+  readonly parse: FunctionConstructor;
+  readonly protocol: Function;
+  readonly subdomain: Function;
+  readonly domain: Function;
+  readonly port: Function;
+  readonly domainext: Function;
+  readonly onlypath: Function;
+  readonly path: Function;
+  readonly query: Function;
+  readonly done: Function;
 }
 
 export interface parsedurlType {
