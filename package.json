@@ -2,7 +2,7 @@
   "name": "mod-url",
   "version": "1.0.0",
   "description": "Modify internals of URL, fast & easy.",
-  "main": "index.js",
+  "main": "lib/mod.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint ./lib/**/*.ts",
