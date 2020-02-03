@@ -3,7 +3,7 @@ const addColonLast = (url: string): boolean => (
 );
 
 const isGarbage = (value: any): boolean => (
-  value === null || value === undefined
+  value === null || value === undefined || (typeof value === 'string' && value === '')
 );
 
 module.exports = {
