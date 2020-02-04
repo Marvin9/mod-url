@@ -17,7 +17,7 @@ function parse(URL: string): modType {
     onlypath: null,
   };
 
-  if (isGarbage(URL) || URL === '' || URL.length > 2048) {
+  if (isGarbage(URL) || URL.length > 2048) {
     this.parsedurl = parsedurl;
     return this;
   }
