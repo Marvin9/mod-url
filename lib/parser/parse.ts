@@ -25,9 +25,9 @@ function parse(URL: string): modType {
   // protocol finder
   let colonSlashSlash = url.indexOf('://');
 
-  if (colonSlashSlash !== 0 && colonSlashSlash !== -1) {
+  if (colonSlashSlash !== -1) {
     const splt = url.split('://');
-    const protocol = splt[0];
+    const protocol = splt[0] === '' ? 'https' : splt[0];
 
     parsedurl.protocol = protocol.toLowerCase();
     modurl = `${parsedurl.protocol}://${splt[1]}${addColonLast(splt[1]) ? '/' : ''}`;
@@ -39,6 +39,9 @@ function parse(URL: string): modType {
 
   // domain processor
   const slashWherePathStarts = modurl.indexOf('/', parsedurl.protocol.length + 3);
+
+  if (slashWherePathStarts - parsedurl.protocol.length - 3 === 0) throw new Error('Invalid URL. It cannot start with /');
+
   colonSlashSlash = modurl.indexOf('://');
   if (slashWherePathStarts !== -1) {
     const extractMiddle = modurl.slice(colonSlashSlash + 3, slashWherePathStarts);
@@ -48,7 +51,7 @@ function parse(URL: string): modType {
     switch (numberOfDots) {
       case 0: {
         Object.assign(parsedurl, {
-          subdomain: 'www',
+          subdomain: '',
           domain: middle[0],
           domainext: 'com',
         });
@@ -57,7 +60,7 @@ function parse(URL: string): modType {
 
       case 1: {
         Object.assign(parsedurl, {
-          subdomain: 'www',
+          subdomain: '',
           domain: middle[0],
           domainext: middle[1],
         });
@@ -90,6 +93,8 @@ function parse(URL: string): modType {
     const colonInDomain = domain.indexOf(':');
     if (colonInDomain !== -1) {
       parsedurl.port = domain.slice(colonInDomain + 1);
+      // eslint-disable-next-line
+      if (isNaN(+parsedurl.port)) throw new Error('Port cannot be alphabet.');
     }
 
     // path extraction
