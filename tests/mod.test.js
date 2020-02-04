@@ -15,7 +15,7 @@ describe('modifier', () => {
 
   test('modifier->subdomain should set default www as subdomain', () => {
     const google = mod.parse('google.com');
-    expect(google.parsedurl.subdomain).toBe('www');
+    expect(google.parsedurl.subdomain).toBe('');
   });
 
   test('modifier->subdomain should change subdomain in object', () => {
@@ -48,12 +48,8 @@ describe('modifier', () => {
     expect(portInString.parsedurl.port).toBe('80');
   });
 
-  test('modifier->done should return url according to object', () => {
-
-  });
-
   test('any function of modifier must not change anything if input is null or undefined', () => {
-    const standard = 'https://www.google.com/';
+    const standard = 'https://google.com/';
     let google = mod.parse('google.com');
     google = google.protocol(null).subdomain(null).domain(null).domainext(null).port(null).done();
     expect(google).toBe(standard);

@@ -50,7 +50,7 @@ test('it should identify middle (hostname)', () => {
   const github = mod.parse('https://google.com');
   expect(github.parsedurl.domain).toBe('google');
   expect(github.parsedurl.domainext).toBe('com');
-  expect(github.parsedurl.subdomain).toBe('www'); // default assign www
+  expect(github.parsedurl.subdomain).toBe(''); // default assign www
 
   const google = mod.parse('http://www.facebook.uk/x/y');
   expect(google.parsedurl.domain).toBe('facebook');
