@@ -48,29 +48,49 @@ describe('modifier', () => {
     expect(portInString.parsedurl.port).toBe('80');
   });
 
+  test('modifier->path should be able to change path, onlypath & query in object', () => {
+    const google = mod.parse('google.com').path('hello/world');
+    expect(google.parsedurl.path).toBe('/hello/world');
+    expect(google.parsedurl.onlypath).toBe('/hello/world');
+    expect(google.parsedurl.query).toBe('');
+
+    const pathWithQuery = mod.parse('google.com/path/x?q=y').path('onlyhello');
+    expect(pathWithQuery.parsedurl.path).toBe('/onlyhello');
+    expect(pathWithQuery.parsedurl.onlypath).toBe('/onlyhello');
+    expect(pathWithQuery.parsedurl.query).toBe('');
+  });
+
   test('any function of modifier must not change anything if input is null or undefined', () => {
     const standard = 'https://google.com/';
     let google = mod.parse('google.com');
-    google = google.protocol(null).subdomain(null).domain(null).domainext(null).port(null).done();
+    google = google.protocol(null).subdomain(null).domain(null).domainext(null).port(null).onlypath(null).path(null).query(null).done();
     expect(google).toBe(standard);
     google = mod.parse('google.com');
-    google = google.protocol(undefined).subdomain(undefined).domain(undefined).domainext(undefined).port(undefined).done();
+    google = google.protocol(undefined).subdomain(undefined).domain(undefined).domainext(undefined).port(undefined).onlypath(undefined).path(undefined).query(undefined).done();
     expect(google).toBe(standard);
   });
 
   test('all modifier function must return this', () => {
     const google = mod.parse('google.com');
     let anotherGoogle = google.protocol('ftp');
-    expect(typeof anotherGoogle).toBe("object");
+    typeObj(anotherGoogle);
     anotherGoogle = google.subdomain('infra');
-    expect(typeof anotherGoogle).toBe("object");
+    typeObj(anotherGoogle);
     anotherGoogle = google.domain('any');
-    expect(typeof anotherGoogle).toBe("object");
+    typeObj(anotherGoogle);
     anotherGoogle = google.domainext('in');
-    expect(typeof anotherGoogle).toBe("object");
+    typeObj(anotherGoogle);
     anotherGoogle = google.port(80);
-    expect(typeof anotherGoogle).toBe("object");
+    typeObj(anotherGoogle);
+    anotherGoogle = google.path('somepath/oh');
+    typeObj(anotherGoogle);
+    anotherGoogle = google.onlypath('some/another/path');
+    typeObj(anotherGoogle);
+    anotherGoogle = google.query('x=y');
+    typeObj(anotherGoogle);
   });
 });
 
-
+function typeObj(instance) {
+  expect(typeof instance).toBe('object');
+}
