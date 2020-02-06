@@ -17,7 +17,8 @@ const URLS = [
   ['google.com/path?q=query&x=y', 'https://google.com/path?q=oneQueryOnly'],
   ['google.com/path/to/some?q=query', 'https://google.com/path/to/some?q=change&x=y'],
   ['google.com/?q=query', 'https://google.com/?q=query'],
-  ['google.com/?q=query', 'https://x.y.google.uk/path?q=query']
+  ['google.com/?q=query', 'https://x.y.google.uk/path?q=query'],
+  ['http://google', 'https://google.com/path?q=query']
 ];
 
 test('it should throw error to invalid urls', () => {
@@ -63,4 +64,7 @@ test('function should be able to modify given url and give desire url', () => {
 
   const url11 = mod.parse(URLS[10][0]).subdomain('x.y').domainext('uk').onlypath('path').done();
   expect(url11).toBe(URLS[10][1]);
+
+  const url12 = mod.parse(URLS[11][0]).protocol('https').domainext('com').onlypath('path').query('q=query').done();
+  expect(url12).toBe(URLS[11][1]);
 });
