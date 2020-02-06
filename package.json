@@ -26,5 +26,12 @@
     "eslint-plugin-import": "^2.20.0",
     "jest": "^25.1.0",
     "typescript": "^3.7.5"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
   }
 }
