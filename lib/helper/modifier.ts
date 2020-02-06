@@ -15,13 +15,13 @@ function subdomain(sbdm: string): modType {
 }
 
 function domain(dm: string): modType {
-  if (isGarbage(dm)) return this;
+  if (isGarbage(dm, true)) return this;
   this.parsedurl.domain = dm;
   return this;
 }
 
 function domainext(ext: string): modType {
-  if (isGarbage(ext)) return this;
+  if (isGarbage(ext, true)) return this;
   this.parsedurl.domainext = ext;
   return this;
 }
@@ -84,7 +84,7 @@ function done(): string {
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
   } = this.parsedurl;
-  return `${protocol}://${subdomain ? `${subdomain}.` : ''}${domain}${port === null ? '' : `:${port}`}.${domainext}${path}`;
+  return `${protocol}://${subdomain || subdomain !== '' ? `${subdomain}.` : ''}${domain}${port === null || port === '' ? '' : `:${port}`}.${domainext}${path}`;
 }
 
 module.exports = {
