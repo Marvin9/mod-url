@@ -1,4 +1,6 @@
 # mod-url
+[![Build Status](https://travis-ci.com/Marvin9/mod-url.svg?branch=master)](https://travis-ci.com/Marvin9/mod-url)
+[![DeepScan grade](https://deepscan.io/api/teams/6570/projects/9330/branches/119830/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6570&pid=9330&bid=119830)
 
 ```
 npm i mod-url
