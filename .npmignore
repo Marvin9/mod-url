@@ -1,0 +1,11 @@
+*.ts
+coverage
+node_modules
+tests
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitignore
+.travis.yml
+LICENSE
+tsconfig.json
