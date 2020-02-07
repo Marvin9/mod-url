@@ -34,9 +34,8 @@ function port(prt: string | number): modType {
 
 function onlypath(op: string): modType {
   if (isGarbage(op)) return this;
-  let newOp = op;
-  const firstChar = op[0];
-  [newOp] = op.split('?');
+  let [newOp] = op.split('?');
+  const firstChar = newOp[0];
   if (firstChar !== '/') {
     newOp = `/${op}`;
   }
