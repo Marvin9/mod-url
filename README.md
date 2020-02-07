@@ -15,18 +15,19 @@ console.log(mod.parse('github.com').done());
 
 ## Use
 
-- ### pass only domain.
+- ### ***.parse(url)*** -> parse url.
+
+**example of accepted url types :** ***github***, ***github.com***, ***www.github.com***, ***http://www.github.com***, ***https://github.com***, ***github.com/path***
 
 ``` javascript
-console.log(mod.parse('github').done());
-// https://github.com/
+const gh = mod.parse('github');
 ```
 
-- ### pass full url.
+- ### ***.done()*** -> get modified string.
 
 ``` javascript
-console.log(mod.parse('http://www.github.com/Marvin9').done());
-// http://www.github.com/Marvin9
+console.log(gh.done());
+// https://github.com/
 ```
 
 - ### modify protocol scheme.
