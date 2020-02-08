@@ -19,6 +19,7 @@
   "author": "mayursinh",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^13.7.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "codecov": "^3.6.4",
@@ -34,5 +35,6 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
-  }
+  },
+  "dependencies": {}
 }
