@@ -35,6 +35,21 @@ describe('modifier', () => {
     expect(google.parsedurl.domain).toBe('facebook');
   });
 
+  test('modifier->domain should be able to change domain as well as domain extension', () => {
+    const google = mod.parse('http://www.google.com').domain('google.com');
+    expect(google.parsedurl.domain).toBe('google');
+    expect(google.parsedurl.domainext).toBe('com');
+    // there should be no side effect on subdomain
+    expect(google.parsedurl.subdomain).toBe('www');
+  });
+
+  test('modifier->domain should be able to change domain, extension and subdomain', () => {
+    const google = mod.parse('google.com').domain('www.google.uk');
+    expect(google.parsedurl.domain).toBe('google');
+    expect(google.parsedurl.domainext).toBe('uk');
+    expect(google.parsedurl.subdomain).toBe('www');
+  });
+
   test('modifier->domainext should be able to change domain extension in object', () => {
     const google = mod.parse('google.com').domainext('uk');
     expect(google.parsedurl.domainext).toBe('uk');
