@@ -16,7 +16,16 @@ function subdomain(sbdm: string): modType {
 
 function domain(dm: string): modType {
   if (isGarbage(dm, true)) return this;
-  this.parsedurl.domain = dm;
+  const dmSplit = dm.split('.');
+  const len = dmSplit.length;
+
+  if (len === 1) {
+    this.parsedurl.domain = dm;
+  } else {
+    this.parsedurl.domainext = dmSplit.pop();
+    this.parsedurl.domain = dmSplit.pop();
+    if (dmSplit.length) this.parsedurl.subdomain = dmSplit.join('.');
+  }
   return this;
 }
 
@@ -83,7 +92,7 @@ function done(): string {
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
   } = this.parsedurl;
-  return `${protocol}://${subdomain || subdomain !== '' ? `${subdomain}.` : ''}${domain}${port === null || port === '' ? '' : `:${port}`}.${domainext}${path}`;
+  return `${protocol ? `${protocol}://` : ''}${subdomain || subdomain !== '' ? `${subdomain}.` : ''}${domain}${port === null || port === '' ? '' : `:${port}`}.${domainext}${path}`;
 }
 
 module.exports = {
