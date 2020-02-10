@@ -77,6 +77,20 @@ console.log(url);
 // https://google.com/search?q=query
 ```
 
+``` javascript
+const url = mod.parse('google.com').domain('www.google.in').done();
+
+console.log(url);
+// https://www.google.in/
+```
+
+``` javascript
+const url = mod.parse('google').domain('google.in').done();
+
+console.log(url);
+// https://google.in/
+```
+
 > **You cannot remove domain. ie .domain('') wont work**
 
 - ### modify domain extension
@@ -131,7 +145,7 @@ console.log(url);
 // https://google.com/seach?foo=bar&baz=foo
 ```
 
-- ### chain modify functions as you want
+- ## **chain modify functions as you want**
 
 ``` javascript
 const url = mod.parse('something').path('/random?query=unknown').protocol('http').subdomain('www').domainext('foo').port('90').domain('something-else').done();
