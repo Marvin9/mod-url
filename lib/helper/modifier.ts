@@ -1,6 +1,6 @@
 import { modType } from '../../config/interfaces';
 
-const { isGarbage } = require('../utils');
+const { isGarbage, portProcessor } = require('../utils');
 
 function protocol(prtcl: string): modType {
   if (isGarbage(prtcl)) return this;
@@ -26,6 +26,9 @@ function domain(dm: string): modType {
     this.parsedurl.domain = dmSplit.pop();
     if (dmSplit.length) this.parsedurl.subdomain = dmSplit.join('.');
   }
+
+  // port finder
+  this.parsedurl = portProcessor(this.parsedurl);
   return this;
 }
 

@@ -1,12 +1,12 @@
 import { parsedurlType, modType } from '../../config/interfaces';
 
-const { addColonLast, isGarbage } = require('../utils');
+const { addColonLast, isGarbage, portProcessor } = require('../utils');
 
 function parse(URL: string): modType {
   const url: string = `${URL}`;
   let modurl: string;
 
-  const parsedurl: parsedurlType = {
+  let parsedurl: parsedurlType = {
     protocol: null,
     subdomain: null,
     domain: null,
@@ -89,13 +89,17 @@ function parse(URL: string): modType {
     }
 
     // port from domain
-    const { domain } = parsedurl;
-    const colonInDomain = domain.indexOf(':');
-    if (colonInDomain !== -1) {
-      parsedurl.port = domain.slice(colonInDomain + 1);
-      // eslint-disable-next-line
-      if (isNaN(+parsedurl.port)) throw new Error('Port cannot be alphabet.');
-    }
+    // const { domain } = parsedurl;
+    // const colonInDomain = domain.indexOf(':');
+    // if (colonInDomain !== -1) {
+    //   const prt = domain.slice(colonInDomain + 1);
+    //   [parsedurl.domain] = domain.split(':');
+    //   if (prt.trim() === '') parsedurl.port = '';
+    //   else parsedurl.port = prt;
+    //   // eslint-disable-next-line
+    //   if (isNaN(+parsedurl.port)) throw new Error('Port cannot be alphabet.');
+    // }
+    parsedurl = portProcessor(parsedurl);
 
     // path extraction
     parsedurl.path = modurl.slice(slashWherePathStarts);
