@@ -11,11 +11,19 @@ const mod = require('mod-url');
 
 console.log(mod.parse('github.com').done());
 // https://github.com/
+
+console.log(mod.parse('http://google.com')
+  .protocol('https')
+  .subdomain('www')
+  .domainext('in')
+  .path('search?q=query')
+  .done());
+// https://www.google.in/search?q=query
 ```
 
-## Use
+## API
 
-- ### ***.parse(url)*** -> parse url.
+### ***.parse(url)*** -> parse url.
 
 **example of accepted url types :** ***github***, ***github.com***, ***www.github.com***, ***http://www.github.com***, ***https://github.com***, ***github.com/path***
 
@@ -23,14 +31,14 @@ console.log(mod.parse('github.com').done());
 const gh = mod.parse('github');
 ```
 
-- ### ***.done()*** -> get modified string.
+### ***.done()*** -> get modified string.
 
 ``` javascript
 console.log(gh.done());
 // https://github.com/
 ```
 
-- ### modify protocol scheme.
+### modify protocol scheme.
 
 ``` javascript
 let url = mod.parse('github');
@@ -43,7 +51,7 @@ console.log(url.done());
 // http://github.com/
 ```
 
-- ### modify subdomain.
+### modify subdomain.
 
 ``` javascript
 const url = mod.parse('github').subdomain('www').done();
@@ -68,7 +76,7 @@ console.log(url);
 // https://github.com/
 ```
 
-- ### modify domain.
+### modify domain.
 
 ``` javascript
 const url = mod.parse('yahoo.com/search?q=query').domain('google').done();
@@ -102,7 +110,7 @@ console.log(url);
 // https://google.uk/search?q=query
 ```
 
-- ### modify port
+### modify port
 
 ``` javascript
 const url = mod.parse('google.com').port(80).done();
@@ -111,7 +119,7 @@ console.log(url);
 // https://google:80.com/
 ```
 
-- ### modify path (including query)
+### modify path (including query)
 
 ``` javascript
 const url = mod.parse('google.com/path/to?q=q1').path('onlypath').done();
@@ -127,7 +135,7 @@ console.log(url);
 // https://github.com/
 ```
 
-- ### modify path (excluding query)
+### modify path (excluding query)
 
 ``` javascript
 const url = mod.parse('google.com/version1?q=query').onlypath('version2').done();
@@ -136,7 +144,7 @@ console.log(url);
 // https://google.com/version2?q=query
 ```
 
-- ### modify query
+### modify query
 
 ``` javascript
 const url = mod.parse('google.com/search?q=query').query('foo=bar&baz=foo').done();
@@ -145,7 +153,7 @@ console.log(url);
 // https://google.com/seach?foo=bar&baz=foo
 ```
 
-- ## **chain modify functions as you want**
+## **chain modify functions as you want**
 
 ``` javascript
 const url = mod.parse('something').path('/random?query=unknown').protocol('http').subdomain('www').domainext('foo').port('90').domain('something-else').done();
@@ -156,7 +164,7 @@ console.log(url);
 
 > **Do not forget to add .done() at last**
 
-- ### DO NOT
+### DO NOT
 
 ``` javascript
 const url1 = mod.parse('google');
