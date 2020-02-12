@@ -10,6 +10,7 @@ const {
   onlypath,
   path,
   query,
+  fragment,
   done,
 } = require('./helper/modifier');
 
@@ -25,6 +26,7 @@ const mod: modType = {
   onlypath,
   path,
   query,
+  fragment,
   done,
 };
 
