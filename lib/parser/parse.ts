@@ -1,6 +1,11 @@
 import { parsedurlType, modType } from '../../config/interfaces';
 
-const { addColonLast, isGarbage, portProcessor } = require('../utils');
+const {
+  addColonLast,
+  isGarbage,
+  portProcessor,
+  fragementProcessor,
+} = require('../utils');
 
 function parse(URL: string): modType {
   const url: string = `${URL}`;
@@ -15,6 +20,7 @@ function parse(URL: string): modType {
     path: null,
     query: null,
     onlypath: null,
+    fragment: null,
   };
 
   if (isGarbage(URL, true) || URL.length > 2048) {
@@ -89,30 +95,32 @@ function parse(URL: string): modType {
     }
 
     // port from domain
-    // const { domain } = parsedurl;
-    // const colonInDomain = domain.indexOf(':');
-    // if (colonInDomain !== -1) {
-    //   const prt = domain.slice(colonInDomain + 1);
-    //   [parsedurl.domain] = domain.split(':');
-    //   if (prt.trim() === '') parsedurl.port = '';
-    //   else parsedurl.port = prt;
-    //   // eslint-disable-next-line
-    //   if (isNaN(+parsedurl.port)) throw new Error('Port cannot be alphabet.');
-    // }
     parsedurl = portProcessor(parsedurl);
 
     // path extraction
     parsedurl.path = modurl.slice(slashWherePathStarts);
     const { path } = parsedurl;
     const questionMark = path.indexOf('?');
+    const hash = path.indexOf('#');
 
     parsedurl.onlypath = path;
 
     if (questionMark !== -1) {
       parsedurl.onlypath = path.slice(0, questionMark);
-      parsedurl.query = path.slice(questionMark + 1);
+      const qry = path.slice(questionMark + 1);
+      if (hash !== -1) {
+        [parsedurl.query] = qry.split('#');
+      } else {
+        parsedurl.query = qry;
+      }
     }
+
+    if (questionMark === -1 && hash !== -1) {
+      parsedurl.onlypath = path.slice(0, hash);
+    }
+    parsedurl = fragementProcessor(parsedurl);
   }
+
 
   this.parsedurl = parsedurl;
   return this;
