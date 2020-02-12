@@ -23,8 +23,20 @@ const portProcessor = (prsdurl: parsedurlType): parsedurlType => {
   return parsedurl;
 };
 
+const fragementProcessor = (prsdurl: parsedurlType): parsedurlType => {
+  const parsedurl = prsdurl;
+  const { path } = parsedurl;
+  const existHash = path.indexOf('#') !== -1;
+  if (existHash) {
+    const [, hash] = path.split('#');
+    parsedurl.fragment = hash;
+  }
+  return parsedurl;
+};
+
 module.exports = {
   addColonLast,
   isGarbage,
   portProcessor,
+  fragementProcessor,
 };
