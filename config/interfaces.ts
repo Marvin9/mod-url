@@ -10,6 +10,7 @@ export interface modType {
   readonly onlypath: Function;
   readonly path: Function;
   readonly query: Function;
+  readonly fragment: Function;
   readonly done: Function;
 }
 
@@ -22,4 +23,5 @@ export interface parsedurlType {
   path: string | null;
   query: string | null;
   onlypath: string | null;
+  fragment: string | null;
 }
