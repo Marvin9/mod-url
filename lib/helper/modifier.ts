@@ -62,18 +62,37 @@ function onlypath(op: string): modType {
 
 function path(pth: string): modType {
   if (isGarbage(pth)) return this;
+
+  if (pth === '') {
+    this.parsedurl.path = '/';
+    this.parsedurl.onlypath = '/';
+    this.parsedurl.query = '';
+    this.parsedurl.fragment = '';
+    return this;
+  }
+
   let newPth = pth;
   if (newPth[0] !== '/') {
     newPth = `/${pth}`;
   }
   const queryExist = newPth.indexOf('?') !== -1;
+  const hashExist = newPth.indexOf('#') !== -1;
+
   if (queryExist) {
     const [onlyPth, query] = newPth.split('?'); // eslint-disable-line
-    this.parsedurl.query = `?${query}`;
+    if (hashExist) {
+      const [qry, hash] = query.split('#');
+      this.parsedurl.query = qry;
+      this.parsedurl.fragment = `#${hash}`;
+    } else this.parsedurl.query = `?${query}`;
     this.parsedurl.onlypath = onlyPth;
   } else {
     this.parsedurl.query = '';
-    this.parsedurl.onlypath = newPth;
+    if (hashExist) {
+      const [onlypth, hash] = newPth.split('#');
+      this.parsedurl.onlypath = onlypth;
+      this.parsedurl.fragment = `#${hash}`;
+    } else this.parsedurl.onlypath = newPth;
   }
   this.parsedurl.path = newPth;
   return this;
@@ -82,12 +101,31 @@ function path(pth: string): modType {
 function query(qry: string): modType {
   if (isGarbage(qry)) return this;
   let newQry = qry;
-  if (qry[0] !== '?') {
+  if (qry[0] !== '?' && qry !== '') {
     newQry = `?${qry}`;
   }
   this.parsedurl.query = newQry;
   const [path] = this.parsedurl.path.split('?'); // eslint-disable-line
-  this.parsedurl.path = [path, newQry.slice(1)].join('?');
+
+  if (qry !== '') this.parsedurl.path = [path, newQry.slice(1)].join('?');
+  else this.parsedurl.path = path;
+
+  const { fragment } = this.parsedurl; // eslint-disable-line
+  if (this.parsedurl.fragment !== '') this.parsedurl.path = `${this.parsedurl.path}${fragment && fragment !== '' ? `#${fragment}` : ''}`;
+  return this;
+}
+
+function fragment(frg: string): modType {
+  if (isGarbage(frg)) return this;
+  let newFrg = frg;
+  if (frg[0] !== '#' && frg !== '') {
+    newFrg = `#${frg}`;
+  }
+  this.parsedurl.fragment = newFrg;
+  const [path] = this.parsedurl.path.split('#'); // eslint-disable-line
+
+  if (frg !== '') this.parsedurl.path = [path, newFrg.slice(1)].join('#');
+  else this.parsedurl.path = path;
   return this;
 }
 
@@ -107,5 +145,6 @@ module.exports = {
   onlypath,
   path,
   query,
+  fragment,
   done,
 };
