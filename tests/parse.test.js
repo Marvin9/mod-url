@@ -24,6 +24,7 @@ test('it should return with all null values -> for empty url or url with more th
     path: null,
     query: null,
     onlypath: null,
+    fragment: null,
   }).toString();
 
   expect(emptyParse.toString()).toBe(op);
@@ -98,4 +99,21 @@ test('it should identify only path (no query)', () => {
 test('it should identify only query', () => {
   const pathWithQuery = mod.parse('google.com/search?q=mod-url&location=india');
   expect(pathWithQuery.parsedurl.query).toBe('q=mod-url&location=india');
+
+  const noQuery = mod.parse('google.com');
+  expect(noQuery.parsedurl.query).toBe(null);
+});
+
+test('it should identify fragment with query or without query', () => {
+  const frgUrl = mod.parse('google.com/home#hi');
+  expect(frgUrl.parsedurl.fragment).toBe('hi');
+
+  const frgUlrQry = mod.parse('google.com/home?q=query#hi');
+  expect(frgUlrQry.parsedurl.fragment).toBe('hi');
+
+  const noFrgUrl = mod.parse('google.com');
+  expect(noFrgUrl.parsedurl.fragment).toBe(null);
+
+  const noFrgUrlQry = mod.parse('google.com/hi?q=query');
+  expect(noFrgUrlQry.parsedurl.fragment).toBe(null);
 });
