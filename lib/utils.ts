@@ -29,7 +29,7 @@ const fragementProcessor = (prsdurl: parsedurlType): parsedurlType => {
   const existHash = path.indexOf('#') !== -1;
   if (existHash) {
     const [, hash] = path.split('#');
-    parsedurl.fragment = hash;
+    parsedurl.fragment = `#${hash}`;
   }
   return parsedurl;
 };
