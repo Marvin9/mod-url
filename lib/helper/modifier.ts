@@ -52,11 +52,8 @@ function onlypath(op: string): modType {
     newOp = `/${op}`;
   }
   this.parsedurl.onlypath = newOp;
-  // eslint-disable-next-line no-shadow
-  let { path } = this.parsedurl;
-  path = path.split('?');
-  path[0] = newOp;
-  this.parsedurl.path = path.join('?');
+  const { query, fragment } = this.parsedurl; // eslint-disable-line
+  this.parsedurl.path = `${this.parsedurl.onlypath}${isGarbage(query, true) ? '' : `?${query}`}${isGarbage(fragment, true) ? '' : fragment}`;
   return this;
 }
 
@@ -105,13 +102,7 @@ function query(qry: string): modType {
     newQry = `?${qry}`;
   }
   this.parsedurl.query = newQry;
-  const [path] = this.parsedurl.path.split('?'); // eslint-disable-line
-
-  if (qry !== '') this.parsedurl.path = [path, newQry.slice(1)].join('?');
-  else this.parsedurl.path = path;
-
-  const { fragment } = this.parsedurl; // eslint-disable-line
-  if (this.parsedurl.fragment !== '') this.parsedurl.path = `${this.parsedurl.path}${fragment && fragment !== '' ? `#${fragment}` : ''}`;
+  this.parsedurl.path = `${this.parsedurl.onlypath}${newQry}${this.parsedurl.fragment ? this.parsedurl.fragment : ''}`;
   return this;
 }
 
@@ -122,10 +113,8 @@ function fragment(frg: string): modType {
     newFrg = `#${frg}`;
   }
   this.parsedurl.fragment = newFrg;
-  const [path] = this.parsedurl.path.split('#'); // eslint-disable-line
-
-  if (frg !== '') this.parsedurl.path = [path, newFrg.slice(1)].join('#');
-  else this.parsedurl.path = path;
+  const { query, fragment } = this.parsedurl; // eslint-disable-line
+  this.parsedurl.path = `${this.parsedurl.onlypath}${isGarbage(query, true) ? '' : `?${query}`}${isGarbage(fragment, true) ? '' : fragment}`;
   return this;
 }
 
