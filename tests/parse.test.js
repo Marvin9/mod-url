@@ -106,10 +106,10 @@ test('it should identify only query', () => {
 
 test('it should identify fragment with query or without query', () => {
   const frgUrl = mod.parse('google.com/home#hi');
-  expect(frgUrl.parsedurl.fragment).toBe('hi');
+  expect(frgUrl.parsedurl.fragment).toBe('#hi');
 
   const frgUlrQry = mod.parse('google.com/home?q=query#hi');
-  expect(frgUlrQry.parsedurl.fragment).toBe('hi');
+  expect(frgUlrQry.parsedurl.fragment).toBe('#hi');
 
   const noFrgUrl = mod.parse('google.com');
   expect(noFrgUrl.parsedurl.fragment).toBe(null);
