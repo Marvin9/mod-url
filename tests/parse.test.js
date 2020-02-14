@@ -98,7 +98,7 @@ test('it should identify only path (no query)', () => {
 
 test('it should identify only query', () => {
   const pathWithQuery = mod.parse('google.com/search?q=mod-url&location=india');
-  expect(pathWithQuery.parsedurl.query).toBe('q=mod-url&location=india');
+  expect(pathWithQuery.parsedurl.query).toBe('?q=mod-url&location=india');
 
   const noQuery = mod.parse('google.com');
   expect(noQuery.parsedurl.query).toBe(null);

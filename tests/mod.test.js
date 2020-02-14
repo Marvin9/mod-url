@@ -85,7 +85,7 @@ describe('modifier', () => {
     const replacePath = mod.parse('good-site.com/foo/bar?baz=k#a').path('x/y?foo=bar#dude');
     expect(replacePath.parsedurl.path).toBe('/x/y?foo=bar#dude');
     expect(replacePath.parsedurl.onlypath).toBe('/x/y');
-    expect(replacePath.parsedurl.query).toBe('foo=bar');
+    expect(replacePath.parsedurl.query).toBe('?foo=bar');
     expect(replacePath.parsedurl.fragment).toBe('#dude');
   });
 
