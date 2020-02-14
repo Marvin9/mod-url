@@ -107,7 +107,7 @@ function parse(URL: string): modType {
 
     if (questionMark !== -1) {
       parsedurl.onlypath = path.slice(0, questionMark);
-      const qry = path.slice(questionMark + 1);
+      const qry = path.slice(questionMark);
       if (hash !== -1) {
         [parsedurl.query] = qry.split('#');
       } else {
