@@ -119,7 +119,7 @@ console.log(url);
 // https://google:80.com/
 ```
 
-### modify path (including query)
+### modify full path
 
 ``` javascript
 const url = mod.parse('google.com/path/to?q=q1').path('onlypath').done();
@@ -151,6 +151,15 @@ const url = mod.parse('google.com/search?q=query').query('foo=bar&baz=foo').done
 
 console.log(url);
 // https://google.com/seach?foo=bar&baz=foo
+```
+
+### modify fragment
+
+``` javascript
+const url = mod.parse('google.com/hi').fragment('#hello').done();
+
+console.log(url);
+// https://google.com/hi#hello
 ```
 
 ## **chain modify functions as you want**
