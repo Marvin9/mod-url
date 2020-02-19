@@ -17,8 +17,9 @@ console.log(mod.parse('http://google.com')
   .subdomain('www')
   .domainext('in')
   .path('search?q=query')
+  .fragment('foo')
   .done());
-// https://www.google.in/search?q=query
+// https://www.google.in/search?q=query#foo
 ```
 
 ## API
@@ -173,7 +174,7 @@ console.log(url);
 
 > **Do not forget to add .done() at last**
 
-### DO NOT
+### DO NOT - (mod-url is mutable)
 
 ``` javascript
 const url1 = mod.parse('google');
