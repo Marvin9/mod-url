@@ -40,6 +40,7 @@ function domainext(ext: string): modType {
 
 function port(prt: string | number): modType {
   if (isGarbage(prt)) return this;
+  if (isNaN(+prt)) return this; // eslint-disable-line
   this.parsedurl.port = `${prt}`;
   return this;
 }

@@ -18,7 +18,7 @@ const portProcessor = (prsdurl: parsedurlType): parsedurlType => {
     if (prt.trim() === '') parsedurl.port = '';
     else parsedurl.port = prt;
     // eslint-disable-next-line
-    if (isNaN(+parsedurl.port)) throw new Error('')
+    if (isNaN(+parsedurl.port)) parsedurl.port = '';
   }
   return parsedurl;
 };
