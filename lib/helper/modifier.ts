@@ -81,7 +81,10 @@ function path(pth: string): modType {
       const [qry, hash] = query.split('#');
       this.parsedurl.query = `?${qry}`;
       this.parsedurl.fragment = `#${hash}`;
-    } else this.parsedurl.query = `?${query}`;
+    } else {
+      this.parsedurl.query = `?${query}`;
+      this.parsedurl.fragment = '';
+    }
     this.parsedurl.onlypath = onlyPth;
   } else {
     this.parsedurl.query = '';
@@ -89,7 +92,10 @@ function path(pth: string): modType {
       const [onlypth, hash] = newPth.split('#');
       this.parsedurl.onlypath = onlypth;
       this.parsedurl.fragment = `#${hash}`;
-    } else this.parsedurl.onlypath = newPth;
+    } else {
+      this.parsedurl.fragment = '';
+      this.parsedurl.onlypath = newPth;
+    }
   }
   this.parsedurl.path = newPth;
   return this;
@@ -98,7 +104,7 @@ function path(pth: string): modType {
 function query(qry: string): modType {
   if (isGarbage(qry)) return this;
   let newQry = qry;
-  if (qry[0] !== '?' && qry !== '') {
+  if (qry[0] !== '?' && qry.trim() !== '') {
     newQry = `?${qry}`;
   }
   this.parsedurl.query = newQry;
@@ -109,7 +115,7 @@ function query(qry: string): modType {
 function fragment(frg: string): modType {
   if (isGarbage(frg)) return this;
   let newFrg = frg;
-  if (frg[0] !== '#' && frg !== '') {
+  if (frg[0] !== '#' && frg.trim() !== '') {
     newFrg = `#${frg}`;
   }
   this.parsedurl.fragment = newFrg;
@@ -122,6 +128,14 @@ function done(): string {
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
   } = this.parsedurl;
+  if (
+    isGarbage(protocol, true)
+    && isGarbage(subdomain, true)
+    && isGarbage(domain, true)
+    && isGarbage(domainext, true)
+    && isGarbage(port, true)
+    && isGarbage(path, true)
+  ) return '';
   return `${protocol ? `${protocol}://` : ''}${subdomain || subdomain !== '' ? `${subdomain}.` : ''}${domain}${port === null || port === '' ? '' : `:${port}`}.${domainext}${path}`;
 }
 

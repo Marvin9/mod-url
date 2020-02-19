@@ -74,7 +74,7 @@ describe('modifier', () => {
     expect(pathWithQuery.parsedurl.path).toBe('/onlyhello');
     expect(pathWithQuery.parsedurl.onlypath).toBe('/onlyhello');
     expect(pathWithQuery.parsedurl.query).toBe('');
-    expect(pathWithQuery.parsedurl.fragment).toBe(null);
+    expect(pathWithQuery.parsedurl.fragment).toBe('');
 
     const emptyPath = mod.parse('google.com/x/y?foo=bar#baz').path('');
     expect(emptyPath.parsedurl.path).toBe('/');

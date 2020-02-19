@@ -46,7 +46,7 @@ function parse(URL: string): modType {
   // domain processor
   const slashWherePathStarts = modurl.indexOf('/', parsedurl.protocol.length + 3);
 
-  if (slashWherePathStarts - parsedurl.protocol.length - 3 === 0) throw new Error('Invalid URL. It cannot start with /');
+  if (slashWherePathStarts - parsedurl.protocol.length - 3 === 0) throw new Error('Invalid URL.');
 
   colonSlashSlash = modurl.indexOf('://');
   if (slashWherePathStarts !== -1) {
