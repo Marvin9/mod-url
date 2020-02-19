@@ -39,7 +39,7 @@ console.log(gh.done());
 // https://github.com/
 ```
 
-### modify protocol scheme.
+### ***.protocol(string)*** -> modify protocol scheme.
 
 ``` javascript
 let url = mod.parse('github');
@@ -52,7 +52,7 @@ console.log(url.done());
 // http://github.com/
 ```
 
-### modify subdomain.
+### ***.subdomain(string)*** -> modify subdomain.
 
 ``` javascript
 const url = mod.parse('github').subdomain('www').done();
@@ -77,7 +77,7 @@ console.log(url);
 // https://github.com/
 ```
 
-### modify domain.
+### ***.domain(string)*** -> modify domain.
 
 ``` javascript
 const url = mod.parse('yahoo.com/search?q=query').domain('google').done();
@@ -102,7 +102,7 @@ console.log(url);
 
 > **You cannot remove domain. ie .domain('') wont work**
 
-- ### modify domain extension
+### ***.domainext(string)*** ->  modify domain extension
 
 ``` javascript
 const url = mod.parse('google.com/search?q=query').domainext('uk').done();
@@ -111,7 +111,7 @@ console.log(url);
 // https://google.uk/search?q=query
 ```
 
-### modify port
+### ***.port(string | number)*** -> modify port
 
 ``` javascript
 const url = mod.parse('google.com').port(80).done();
@@ -120,7 +120,7 @@ console.log(url);
 // https://google:80.com/
 ```
 
-### modify full path
+### ***.path(string)*** -> modify full path
 
 ``` javascript
 const url = mod.parse('google.com/path/to?q=q1').path('onlypath').done();
@@ -136,7 +136,7 @@ console.log(url);
 // https://github.com/
 ```
 
-### modify path (excluding query)
+### ***.onlypath(string)*** -> modify path (excluding query & fragment)
 
 ``` javascript
 const url = mod.parse('google.com/version1?q=query').onlypath('version2').done();
@@ -145,7 +145,7 @@ console.log(url);
 // https://google.com/version2?q=query
 ```
 
-### modify query
+### ***.query(string)*** -> modify query
 
 ``` javascript
 const url = mod.parse('google.com/search?q=query').query('foo=bar&baz=foo').done();
@@ -154,7 +154,7 @@ console.log(url);
 // https://google.com/seach?foo=bar&baz=foo
 ```
 
-### modify fragment
+### ***.fragment(string)*** -> modify fragment
 
 ``` javascript
 const url = mod.parse('google.com/hi').fragment('#hello').done();
