@@ -111,6 +111,18 @@ describe('modifier', () => {
     expect(removeFragment.parsedurl.path).toBe('/hi?foo=bar')
   });
 
+  test('toString should return correct url string', () => {
+    const standard = 'https://google.com/';
+    let google = mod.parse('google');
+    expect(google.toString()).toBe(standard);
+
+    google = mod.parse('google.com');
+    expect(google.subdomain('www').toString()).toBe('https://www.google.com/');
+
+    google = mod.parse('');
+    expect(google.toString()).toBe('');
+  });
+
   test('any function of modifier must not change anything if input is null or undefined', () => {
     const standard = 'https://google.com/';
     let google = mod.parse('google.com');

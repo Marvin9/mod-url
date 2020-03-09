@@ -16,7 +16,7 @@ test('it should return with all null values -> for empty url or url with more th
   const nullParse = mod.parse(null);
   const undefinedParse = mod.parse(undefined);
 
-  const op = ({
+  const op = {
     protocol: null,
     subdomain: null,
     domain: null,
@@ -25,12 +25,12 @@ test('it should return with all null values -> for empty url or url with more th
     query: null,
     onlypath: null,
     fragment: null,
-  }).toString();
+  };
 
-  expect(emptyParse.toString()).toBe(op);
-  expect(moreCharParse.toString()).toBe(op);
-  expect(nullParse.toString()).toBe(op);
-  expect(undefinedParse.toString()).toBe(op);
+  expect(emptyParse.parsedurl).toMatchObject(op);
+  expect(moreCharParse.parsedurl).toMatchObject(op);
+  expect(nullParse.parsedurl).toMatchObject(op);
+  expect(undefinedParse.parsedurl).toMatchObject(op);
 });
 
 
