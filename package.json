@@ -1,6 +1,6 @@
 {
   "name": "mod-url",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Modify internals of URL, fast & easy.",
   "main": "lib/mod.js",
   "scripts": {
