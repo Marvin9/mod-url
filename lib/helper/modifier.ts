@@ -125,10 +125,11 @@ function fragment(frg: string): modType {
   return this;
 }
 
-function done(): string {
+function done(ths?): string {
+  const mainObject = ths || this;
   const {
     protocol, subdomain, domain, domainext, port, path // eslint-disable-line
-  } = this.parsedurl;
+  } = mainObject.parsedurl;
   if (
     isGarbage(protocol, true)
     && isGarbage(subdomain, true)
@@ -138,6 +139,10 @@ function done(): string {
     && isGarbage(path, true)
   ) return '';
   return `${protocol ? `${protocol}://` : ''}${subdomain || subdomain !== '' ? `${subdomain}.` : ''}${domain}${port === null || port === '' ? '' : `:${port}`}.${domainext}${path}`;
+}
+
+function toString(): string {
+  return done(this);
 }
 
 module.exports = {
@@ -151,4 +156,5 @@ module.exports = {
   query,
   fragment,
   done,
+  toString,
 };

@@ -12,6 +12,7 @@ const {
   query,
   fragment,
   done,
+  toString,
 } = require('./helper/modifier');
 
 const mod: modType = {
@@ -28,6 +29,7 @@ const mod: modType = {
   query,
   fragment,
   done,
+  toString,
 };
 
 module.exports = { ...mod };

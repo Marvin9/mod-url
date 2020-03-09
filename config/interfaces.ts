@@ -12,6 +12,7 @@ export interface modType {
   readonly query: Function;
   readonly fragment: Function;
   readonly done: Function;
+  readonly toString: Function;
 }
 
 export interface parsedurlType {
